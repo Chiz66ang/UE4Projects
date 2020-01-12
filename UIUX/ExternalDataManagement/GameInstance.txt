@@ -1,0 +1,16 @@
+Actor Component 사용, 캐릭터 데이터 관리(Level Attack HP)
+- Actor Component: 캐릭터의 일부 기능을 담당할 컴포넌트
+- SceneComponent: 트랜스폼을 가진 콤포넌트(위치, 크기, 회전 정보를 가질 수 있음)
+- PrimitiveComponent: 렌더링 될 수 있는 콤포넌트(화면에 보이게 됨)
+
+- ActorComponent를 상속한 클래스 생성
+-캐릭터 클레스에 ActorComponent 멤버변수 선언
+-캐릭터 생성자에서 콤포넌트 생성/및 맴버변수 초기화
+-InitializeComponent()에서 GameInstance에 로드된 데이터 접근
+-auto gameInstance = Cast<MyGameInstance>UGameplayStatics::GetGameInstance(GetWorld());
+-구조체포인터 = gameInstance->GetCharacterData(3);
+-캐릭터에서는 AddLamda()로 델리게이트에 함수 등록
+- 캐릭터가 대미지를 입으면 액터 컴포넌드의 SetDamage(50) 호출
+- 액터 컴포넌트는 캐릭터의 HP를 대미지만큼 감소시킨다.
+-HP가 0이면 델리게이트를 통해 캐릭터에게 Broadcast()
+- 캐릭터가 HP가 0이 될 시에 죽는 에니메이션 실행

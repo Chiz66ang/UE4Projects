@@ -1,0 +1,25 @@
+챕터 11
+CSV (Comma Seperated Values) 데이터 에셋 사용하기
+- 목표: CSV데이터를 읽어와서 화면에 출력
+- 엑셀이나 메모장으로 데이터를 작성 (p.354)
+- GameInstance 클래스 작성: 시작~끝까지 유지되는 객체
+- Init()함수를 엔진에서 자동으로 호출함
+//Init 게임이 시작 되면 가장 먼저 호출됨. 
+//이 함수를 상속받아 override 해줘야한다.
+- GameInstance 클래스 위에 구조체 선언
+//게임에서 전역으로 사용할 구조체 선언해주는 것
+//GameInstance내에서 CSV를 읽어와 사용할 수 있는 함수를 만들어둔다 (이 클래스는 게임 시작부터 끝까지 유지됨으로)
+- 데이터를 모델링 할 구조체는 FTableRowBase를 상속(p.355)
+- 컴파일 후 데이터를 임포트하여 데이터 에셋으로 변환
+- 데이터 에셋을 더블클릭하여 정상인지 확인
+- 데이터 에셋의 레퍼런스를 이용하여 UDataTable 객체 생성
+- 구조체 포인터 = UDataTable->FindRow<구조체>("12", TEXT("Error"))
+- 화면에 한행의 데이터를 표시한다. 
+
+Name, Score, Team, ID
+1, 56, TeamA, myid
+2, 78, TeamB, myid2
+
+
+ActorComponent 사용, 캐릭터 데이터 관리
+UI사용, 캐릭터 위에 점수 표시
