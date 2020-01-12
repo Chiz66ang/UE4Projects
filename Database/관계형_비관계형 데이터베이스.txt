@@ -1,0 +1,32 @@
+관계형/비관계형
+
+SQL : Structured Query Language
+   -관계형 데이터베이스 시스템에서 표준으로 사용되는 질의어
+   -Oracle, MySQL, ...SQL을 사용하여 데이터를 관리함
+   -테이블, 행, 열 (Primary key, Foreign key)
+   -한 행에 한개의 엔티티 속성을 저장
+
+NoSQL:
+   -MongoDB, MariaDB : SQL을 사용하지 않고 JSON, JavaScript형태로 명령
+   -Collection, Document
+   -JSON 형식의 문서를 저장, {'id':'S120','email':'smith@daum.net'}
+   (key와 value를 :으로 짝지어 저장)
+
+https://www.mongodb.com/
+
+cmd명령어
+mongo
+show dbs
+use MYDB
+db.Players.find() (Collection의 이름을 주면 된다)
+특정 Document를 찾고 싶으면 db.Players.find({name='King'})
+show collections
+db.Players.insert({})
+db.Players.update({행의 조건},{$set:{열 이름}})
+db.Players.remove({조건})
+db.Players.deleteOne({조건})
+db.Players.deleteMany({조건})
+
+몽고디비 npmjs.com
+(node package management)
+https://www.npmjs.com/package/mongodb

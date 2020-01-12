@@ -1,0 +1,23 @@
+1. 게임에 참여할 때마다 새로 생성되는 데이터를 저장하기 위해 적합한 데이터베이스 형식: 관계형 데이터베이스
+언리얼 엔진에서 플레이어 정보를 저장하기에 적당한 프레임워크: PlayerState
+2. 관계형
+3. 비관계형
+4. Primary Key, Foreign Key, Player, id
+5. NotNull, Unique, Primary Key, Foreign Key, Check
+6. References Player(id)
+7. JSON, Collection, Document
+8. CREATE TABLE, VARCHAR2(10) PRIMARY KEY, VARCHAR2(20) NOTNULL
+9. INSERT INTO, id, name, 'player1', 'smith'
+10.UPDATE, SET, WHERE
+11. use GameDB, db.Player.find(), db.Player.find({name = 'King'}), 
+12. mongodb, MyDB, dbName
+13. db.collection('Player'), collection, 
+14. collection.find.
+15. INNER JOIN, ,'id=player1'
+16. SELECT team FROM Player
+WHERE team =
+(SELECT team FROM Player WHERE id='player2');
+17. Transaction
+18. Commit, Rollback
+19. commit(), rollback()
+20. autoCommit

@@ -1,0 +1,12 @@
+Node.js 회원제 사이트 만들기
+
+-app.js
+-login.html (main.html 이동링크)
+-main.html
+
+Web Programming
+-Front-End Programming
+ 이용자의 웹브라우저에서 실행되는 언어(Java Script, HTML, CSS)를 사용
+ 
+-Back-End Programming
+ Web Server에서 실행되는 언어(Node.js, PHP, JSP, Python)를 사용

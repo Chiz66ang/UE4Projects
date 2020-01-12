@@ -1,0 +1,8 @@
+AJAX (비동기통신)
+-Asynchronous Javascript And XML
+-표준 자바스크립트를 사용한 AJAX는 코드량이 많다.
+-간결한 AJAX를 구현하기 위해 jQuery를 사용한다.
+
+jQuery
+-자바 스크립트 라이브러리
+-jquery.com

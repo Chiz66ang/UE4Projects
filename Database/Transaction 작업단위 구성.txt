@@ -1,0 +1,29 @@
+Transaction의 예
+Transaction: 한 작업단위
+
+commit()   : 방금까지 수행한 명령의 결과를 영구 반영한다.
+rollback() : 방금 수행한 명령을 하기 전으로 되돌리라는 명령
+
+여러개의 SQL문장이 한 작업단위(Transaction)로 구성되어 있다면
+각 구성 SQL문장은 문장단위로 commit을 수행하면 안된다
+즉, 각 구성 SQL문장이 모두 성공적으로 수행될 때만 commit을 수행해야 한다.
+
+아래처럼 update_db() 함수는 SQL문장을 파라미터로 받아서
+어떤 테이블의 내용을 갱신하는 기능을 가진다고 생각해보자.
+
+이들 2개의 함수가 모두 성공적으로 수행되면 DB에 영구적으로 반영하고 한다면?
+
+	const oracledb = require('oracledb');
+
+	//여기에 문장단위로 영구 반영하지 않도록 설정하려면?
+	oracledb.autoCommit = false;
+	//오토커밋을 설정해준 후에 반드시 이후에 커밋 명령을 줘야한다. 
+
+	let ret1 = update_db(sql); //첫번째 SQL 실행
+	let ret2 = update_db(sql); //두번째 SQL 실행
+
+	//2개의 문장이 모두 성공적으로 수행된 경우에만 영구 반영하도록 명령하려면?
+	if(ret1 && ret2){ oracledb.commit();}
+	else		{oracledb.rollback();}
+	//데이터베이스에서 쓸 때는 ()없이 써도 되지만 이 경우에는 함수이므로 
+	()를 반드시 써줘야한다.

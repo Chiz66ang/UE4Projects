@@ -1,0 +1,24 @@
+Node.js
+
+- Server Side Javascript: 서버에서 실행되는 자바 스크립트
+- 쉽게 웹서버 제장이 가능
+- Express, Socket.io 모듈을 이용해서 간단히 고품질의 웹사이트 제작이 가능하다.
+- 클라이언트 접속과 DB접속이 쉽다.
+- HTTP 웹브라우저, UE게임에서도 HTTP 접속이 가능하다.
+- 이런 점을 이용해서 언리얼-> Node.js -> 오라클 연결을 구축해보자.
+
+Node.js 다운로드
+- https://nodejs.org/en/download/
+
+다운로드 받은 후 명령창cmd를 켜고 node라고 쳐준다.
+그러면 >하나만 나오는데 이는 node가 활성화 되었다는 뜻이다.
+나머지 명령은 javascript 언어로 해주면 된다.
+명령어 예시)
+- console.log('문자열') -> 로그를 띄우는 명령어
+
+명령어를 메모장에다 .js 형식으로 저장하여 cmd에서 
+node 경로를 주면 코드가 실행된다.
+
+계속 메모장에서 하기 힘드니 툴을 깔아보자
+visual studio code 다운로드
+

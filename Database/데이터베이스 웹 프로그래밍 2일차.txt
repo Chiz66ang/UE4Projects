@@ -1,0 +1,9 @@
+Node.js를 이용한 Oracle 연결 및 SQL 실행
+Node.js 웹서버에 웹브라우저로 접속
+GET Request
+POST Request
+Unreal Engine에서 VaRest 플러그인을 통한 웹서버 접속
+Unreal Engine 로그인 -> Node.js(웹서버)->Oracle
+
+언리얼은 웹클라이언트로써 우리가 웹서버를 만들어 그에 접근할 수 있도록 한다.
+
