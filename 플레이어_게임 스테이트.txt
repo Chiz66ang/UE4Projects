@@ -1,0 +1,65 @@
+플레이어가 상대방을 제거할 때 상대방의 점수를 플레이어 점수에 가산한다.
+상태저장 클래스
+PlayerState: 플레이어의 현재 상태값을 저장(PREINT, LOADING, READY, DEAD 등등)
+ - enum class CharacterState: uint8		//CharacterState = 자료형이다. unsignedint8bit(8bit 양수: 0~255사이의 숫자)
+   {
+	PREINT, LOADING, READY, DEAD
+   }
+CharacterState STATE;   		//CharacterState 자료형의 변수 생성
+STATE = CharacterState::LOADING; 	//변수를 값으로 초기화
+
+
+GameState:게임 전체 상태 저장
+
+UserWidget
+ - 캐릭터의 한개의 컴포넌트로 사용하는 경우
+
+PlayerController->SetInputMode();	//마우스 키보드를 어떤 용도로 쓸 것인가?
+FInputModeUIOnly			//입력장치를 UI와 상호작용할 때만 쓴다 (로그인 화면처럼)
+FInputModeGameAndUI		//입력장치를 게임과 UI와 상호작용으로 할 때 쓴다.
+FInputModeGameOnly		//입력장치를 게임용으로만 쓴다. (게임 기능만)
+
+FText: 유니코드 문자열 (문자열 연산 제한, but 화면에 문자를 프린트 할 때 쓰면 좋음)
+FString: 모든 문자열/ 문자열 연산 가능
+//문자열 조작 후 FText로 바꿔 출력해야하는 경우가 있음
+
+FText txt = FText::FromString("Hello");
+
+AnimInstance
+Animation Blueprint
+
+UserWidget
+유저인터페이스 > Widget
+MyWidget = CreateWidget<MyWidgetName>()
+MyWidget->AddToViewport();
+
+TWeakObjectPtr<클래스명> ptr;	//ptr변수에 객체의 주소가 들어있는데, 소유권이 없기 때문에 객체가 지워져도 변수는 남아있다.
+				//때문에 약포인터 변수를 쓸 때는 if로 nullptr인지 항상 검사해줘야한다.
+
+Character의 액터컴포넌트: 기능 밖에 없는 컴포넌트(e.g. hp값 계산)
+KINDA_SMALL_NUMBER: 0에 근접한 매우 작은 수 (0.00001)
+
+SetActorHiddenInGame(true);
+HPBarWidget->SetHiddenInGame(true);
+
+PlayerController->RestartLevel		//같은 레벨에서 한스테이지 더 실행할 때
+DisableInput			//입력장치 차단
+
+GameState
+- 게임 전체 상태 관리
+- 전체 플레이어의 스코어
+
+GameState의 포인터 구하기
+- GameMode의 GameState 속성
+
+최근 데미지를 가한 콘트롤러 구하기 (LastHitBy)
+- destroyedActor->LastHitBy (PlayerController, AIController)
+
+OnConstruction() : 에디터의 뷰포트에 올리거나 SpawnActor()를 이용하여 생성할 때 호출됨 (개발자 전용)
+
+전체 콘트롤러 목록 구하기
+- GetWorld()->GetPlayerControllerIterator();
+//PlayerController 안에 있는 PlayerState 접근 가능, 플레이어 점수나 플레이어 정보 접근 가능 (즉, 모든 플레이어의 정보 접근 가능)
+
+GameMode의 포인터 구하기
+- GetWorld()->GetAuthGameMode() (Authentication: 인증)

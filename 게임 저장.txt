@@ -1,0 +1,19 @@
+SaveGame 클래스 생성
+- SaveGame 클래스의 맴버변수에 저장할 데이터 할당
+
+SaveGame을 통해 게임 데이터 읽어오기
+FString slotName = TEXT("Player1");
+auto MySaveGame sg;
+sg = Cast<MySaveGame>(UGameplayStatics::LoadGameFromSlot(slotName));
+if(sg==nullptr) 
+{
+sg = GetMutableDefault<MySaveGame>();
+}
+
+SaveGame을 통해 게임 데이터 저장하기
+MySaveGame sg = NewObject<UMySaveGame>(); //얼리얼 오브젝트 생성, 자동 제거됨
+//함수 템플릿. 함수를 돌리고 리턴값이 MySaveGame이라는 뜻.
+sg -> PlayerName = "PlayerName";
+sg -> Score = 77;
+UGameplayStatics::SaveGameToSlot(sg, "Player1", 0);
+//객체의 직렬화. 객체를 그대로 저장하여 나중에 쓸 때 객체를 그대로 꺼내서 쓸 수 있다.
