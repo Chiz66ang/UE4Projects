@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang='utf8'>
+    <head>
+        <title>구구단을 외자</title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                //alert('Ready');
+                $('button[type=button]').click(function(){
+                    /* 버튼을 누르면 폼에서 단수를 구한다.
+                    그 단수를 서버에 비동기요청으로 전송한다
+                    서버에서 오는 응답을 변수로 받아서 out태그에 부착한다*/
+                    let num = $('#num').val();
+                    console.log('num='+ num);
+                    $.ajax({
+                        url : '/result', 
+                        data : {'num':num},
+                        method: 'get',
+                        dataType: 'json',
+                        success : function(res){
+                            //alert('응답 수신됨'+ res)
+                            let gugu ='';
+                            for(let i =0; i<9; i++){
+                                gugu += res.gugu[i]+'<br>';
+                            }
+                            $('#out').html(gugu);
+                        },
+                        error : function(xhr, status, error){
+                            alert(error);
+                        }
+                    });
+                });
+            });
+
+            function gugu(){
+                if(math.num.value == ''){
+                    alert('숫자를 입력해주세요');
+                    document.getElementById('num').focus();
+                    return;
+                }
+                if(math.num.value < 2 || math.num.value > 9){
+                    alert('범위 안의 숫자를 입력해주세요');
+                    document.getElementById('num').focus();
+                    return;
+                }
+                math.submit();
+            }
+        </script>
+    </head>
+
+    <body>
+        <h3>2부터 9까지의 숫자를 입력하세요</h3>
+        <form name='math' method='get' action='/result'>
+        Num <input type='number' name='num' id='num' value=''>
+        <button type='button'>Go!</button>
+        </form>
+        <div id='out'></div>
+    </body>
+</html>

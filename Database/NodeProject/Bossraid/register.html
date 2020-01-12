@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang='utf8'>
+    <head>
+        <title>BossRaid Register</title>
+        <style>
+            form {width:300px; border:1px solid black; padding:20px}
+            label{display:inline-block; width:100px; text-align: left;}
+            div#button{display:inline-block; width:300px; text-align: center; margin:10px}
+            div#out{color: green;}
+            label#idout{color: green;}
+        </style>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            var emailcheck = false;
+            var idcheck = false;
+            $(document).ready(function(){
+                $('button[id=emailcheck]').click(function(){
+                    //버튼을 누르면 문자열을 받아와 서버에 보내준다. 응답을 받아 띄워준다.
+                    let email = $('#email').val();
+                    if(!email){
+                    alert('Please enter your email');
+                    document.getElementById('email'),focus();
+                    return;
+                    }
+
+                    $.ajax({
+                        url : '/emailrepcheck', 
+                        data : {'email':email},
+                        method: 'post',
+                        dataType: 'json',
+                        success : function(res){
+                            let result ='';
+                            result += res.result;
+                            if(result == 'New User'){
+                                alert('Welcome! Please proceed with Registeration!')
+                                $('#out').html('Email Checked');
+                                emailcheck = true;
+                            }
+                            else{
+                                alert('You are already registered!');
+                                return;
+                            }
+                            
+                        },
+                        error : function(xhr, status, error){
+                            alert(error);
+                        }
+                    })
+                });
+
+                $('button[id=idcheck]').click(function(){
+                    let id = $('#id').val();
+                    if(!id){
+                    alert('Please enter your id');
+                    document.getElementById('id'),focus();
+                    return;
+                    }
+
+                    $.ajax({
+                        url : '/idrepcheck', 
+                        data : {'id':id},
+                        method: 'post',
+                        dataType: 'json',
+                        success : function(res){
+                            let result ='';
+                            result += res.result;
+                            if(result == 'Valid ID'){
+                                alert('Valid ID')
+                                $('#idout').html('ID Checked');
+                                idcheck = true;
+                            }
+                            else{
+                                alert('Invalid ID! Please use a different ID!');
+                                document.getElementById('id'),focus();
+                                return;
+                            }
+                        },
+                        error : function(xhr, status, error){
+                            alert(error);
+                        }
+                    })
+                });
+            });
+           
+           function formCheck(){
+            //email, id, pass가 제대로 입력되어있는지 검사
+            if(RegForm.email.value==''){
+                alert('Please enter your email');
+                document.getElementById('email'),focus();
+                return;
+            };
+            if(RegForm.id.value==''){
+                alert('Please enter your ID');
+                document.getElementById('id').focus();
+                return;
+            };
+            if(RegForm.pass.value==''){
+                alert('Please enter your Password');
+                document.getElementById('pass').focus();
+                return;
+            };
+            if(emailcheck == false|| idcheck == false)
+            {
+                if(emailcheck == false){
+                    alert('Please Check your email first!');
+                    document.getElementById('email'),focus();
+                    return;
+                }
+                else {
+                    alert('Please Check your ID first!')
+                    document.getElementById('email'),focus();
+                    return;
+                }
+            }
+            RegForm.submit();
+           }
+        </script>
+    </head>
+
+    <body>
+        <h3>Register form</h3>
+        <form name='RegForm' method='post' action='/regnewuser'>
+            <div><label>Email</label> <input type='text' name='email' id='email' value=''></div>
+            <div id='emailcheck'><button type='button' id='emailcheck'>CHECK</button></div>
+            <div id='out'></div>
+            <div><label>I D</label> <input type='text' name='id' id='id' value=''></div>
+            <div><button type= 'button' id='idcheck'>CHECK</button> <label id='idout'></label></div>
+            <div><label>Pass</label> <input type='password' name='pass' id='pass' value=''></div>
+            <div id='button'><button type='button' onclick= 'formCheck();' > REGISTER </button></div>
+        </form>
+    </body>
+</html>

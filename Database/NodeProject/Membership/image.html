@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang='utf8'>
+    <head>
+        <title>jQuery Test</title>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                alert('jQuery ready');
+
+                
+            });
+            function getImage(fname){
+                $('#pic').attr('src','/img/?pic='+ fname);
+            }
+        </script>
+    </head>
+    <body>
+        <a href="javascript:getImage(pic.jgp);">박세리</a>
+        <a href="javascript:getImage('pic2.jpg');">박지성</a>
+        <img src='/img' id='pic'>
+    </body>
+</html>

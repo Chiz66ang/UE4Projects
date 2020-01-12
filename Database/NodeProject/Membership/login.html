@@ -1,0 +1,45 @@
+<!--HTML5부터 아래 코드를 써줘야 한다. HTML문법 규칙을 따르겠다. 선언해주는 것. -->
+<!DOCTYPE html>
+<!--html 오프닝/스타트 태그. 
+클로징/앤드 태그는 /html
+그 안에 든 것은 앨리먼트/ 요소
+html문서의 시작과 끝은 나타낸다
+lang=utf8은 다른 국가에서도 언어가 깨지지 않도록 해준다.-->
+<html lang='utf8'> 
+    <head> <!--html문서의 머리: 웹 브라우저 화면에는 보이지 않는 부분. 선언 부분-->
+        <title>Login Form</title>
+        <style>
+            form {width:300px; border:1px solid black; padding:20px}
+            label{display:inline-block; width:100px; text-align: left;}
+            div#button{display:inline-block; width:300px; text-align: center; margin:10px}
+        </style>
+        <script>
+           function formCheck(){
+            //id, pass가 제대로 입력되어있는지 검사
+            if(loginForm.id.value==''){
+                alert('ID는 필수입니다');
+                document.getElementById('id').focus();
+                return;
+            };
+            if(loginForm.pass.value==''){
+                alert('비밀번호를 입력해주세요');
+                document.getElementById('pass').focus();
+                return;
+            };
+            loginForm.submit();
+           }
+        </script>
+    </head>
+    <body> <!--html문서의 몸통: 웹 브라우저에 노출되는 부분-->
+        <!--<h1>Welcom My Site!</h1> 짱 굵은 헤더-->
+        <h3>Type Your ID & Password</h3>
+        <form name='loginForm' method='post' action='/login'>
+            <!--<lable>같이 기능이 없지만 필요한 것은 시멘틱 태그라고 한다. 이 태그로 쌓여진 곳을 꾸밀 수 있다
+            <div>태그는 나눈다는 뜻이다. 내용을 한줄씩 분활해준다-->
+            <div><label>I D</label> <input type='text' name='id' id='id' value='Ward'></div>
+            <div><label>Pass</label> <input type='password' name='pass' id='pass' value='123456'></div>
+            <div id='button'><button type='button' onclick= 'formCheck();' > LOGIN </button></div>
+        </form>
+        <div id="out"></div>
+    </body>
+</html>
