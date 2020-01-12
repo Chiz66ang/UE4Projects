@@ -1,0 +1,15 @@
+Mixamo 캐릭터 Skeleton 공유하기
+
+-Mixamo 캐릭터는 모두 Skeleton이 동일한 구조.
+- 하지만 Skeleton의 이름이 다르기 때문에 애니메이션 공유 안됨
+- 다양한 캐릭터가 동일한 Skeleton을 사용한다면
+캐릭터마다 애니메이션을 따로 생성할 필요가 없다.
+Animation Blueprint를 따로 생성할 필요가 없다
+플레이어가 어떤 캐릭터를 선택하든지 애니메이션은 동일하다.
+
+언리얼 엔진에서는 Skeletal Mesh의 Skeleton을 변경할 수 있다
+Mixamo 캐릭터의 Skeletal Mesh에 적용된 Skeleton을 모두 통일
+Mixamo 캐릭터를 휴머노이드형으로 리타게팅
+
+3인칭 템플릿에 포함된 ThirdPerson_AnimBP를 애님 블루프린트 리타겟 > Mixamo 스켈레톤 선택 > 리타겟
+위와 같이 하면 리타게팅 완료된 애니메이션 블루프린트 생성됨.
