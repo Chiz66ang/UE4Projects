@@ -1,0 +1,63 @@
+미니맵 만들기
+
+BP베이스 3인칭 탬플릿을 생성하고 AI캐릭터를 만든다.
+AI캐릭터가 플레이어를 보면 즉시 추적하도록 설정한다.
+
+1. 3인칭 캐릭터 블루프린트 에디터를 연다.
+Capsule Componenet에 SpringArm 컴포넌트 추가.
+추가된 SpringArm 컴포넌트를 Y축 중심으로 -90도 회전하여 수직으로 세운다.
+
+SpringArm에 SceneCaptureComponent2D를 추가하고 이름을 SceneCapture 등으로 변경한다.
+-위와같이 하면 SpringArm이 수직으로 세워져 있는 끝에 SceneCapture가 연결되므로 수직으로 내려다보면서 장면을 캡처하게 된다.
+//SceneCaptureComponent2D: 씬을 찍어내는 컴포넌트. 시시각각 변하는 이 이미지를 받아주는 것이 RenderTarget이다. (둘은 짝으로 쓰임)
+
+2. 미니맵이 그려질 애셋(RenderTarget)을 CB에 생성한다.
+CB에서 > AddNew > Materials & Textures > RenderTarget 선택
+- RenderTarget은 일반적인 Texture2D와 같은 이미지로 사용할 수 있다.
+생성된 RenderTarget의 이름을 Minimap_Render_Target 등으로 변경.
+
+3. SceneCapture에 RenderTarget을 연결한다.
+SceneCapture 선택 > 디테일 뷰 > Scene Capture > Texture Target > 위에 생성한 Minimap_Render_Target 지정.
+캐릭터 블루프린트 에디터를 닫는다.
+
+4. RenderTarget의 머티리얼 생성
+CB에 있는 Minimap_Render_Target > 마우스 우측 > Create Material
+생성된 머티리얼을 더블클릭하여 에디터를 연다.
+머티리얼 노드 선택 > 왼쪽 속성창에서 > Material > Material Domain > User Interface로 변경
+머티리얼 에디터에서 저장 > 에디터를 닫는다.
+
+5. 위젯블루프린트를 생성하여 스크림에 미니맵 이미지를 생성한다.
+Canvas 위에 Image를 드래그하여 256*256 크기로 설정 > 선택 > 디테일뷰 > Appearance > Brush > Image >
+위에서 생성한 머티리얼 지정 > 저장 > 에디터 닫는다
+
+레벨 블루프린트에서 위젯을 스크린에 보이도록 설정한다.
+Create Widget노드에 위에서 생성한 위젯블루프린트를 지정하고 Add To Viewport 노드를 연결한다.
+저장 > 에디터를 닫는다.
+
+6. 3인칭 캐릭터 블루프린트를 열고 SpringArm을 선택하고 디테일뷰에서 Camera Settings > Pitch, Yaw, Roll
+모든 항목 체크해제.
+
+7. Scene Capture 컴포넌트 선택 > 디테일뷰 > Projection > Project Type > Orthographic, 
+위와 같은 항목 내에서 Orth Width > 1000 정도로 지정한다.
+컴파일 > 저장 > 에디터를 닫는다.
+게임을 실행하여 오쏘 그래픽 효과를 테스트한다.
+
+8. 캐릭터를 대체할 스프라이트 이미지를 설정한다.
+3인칭 캐릭터 블루프린트를 열고 Scene Capture 선택 > 디테일 뷰 > SceneCapture 하단 확장 > General Show Flags
+> Skeletal Meshes 선택해제.
+- 위와 같이 설정하면 미니맵에서 캐릭터는 보이지 않게 된다. 대신 조그만 스프라이트 이미지를 보여주면 된다.
+
+9. 이미지를 CB안으로 임포트 한다.
+이미지 위에서 마우스 우측 > Sprite Actions > Create Sprite
+
+3인칭 캐릭터 블루프린트에서 SpringArm 컴포넌트 아래에 컴포넌트 추가 (Paper Sprite) > 선택 > 디테일뷰
+> Sprite > Source Sprite > 위에서 생성한 스프라이트 지정
+
+추가된 스프라이트 컴포넌트를 적당히 회전하여 캐릭터 X와 스프라이트의 X방향이 일치하도록 조정한다.
+PaperSprite 컴포넌트가 CapsuleComponent의 하위에 오도록 계층구조를 변경한다.
+캐릭터의 머리 위에 스프라이트가 보이는지 확인한다.
+컴파일 > 저장 > 실행 테스트
+
+10. 캐릭터에게는 스프라이트가 보이지 않도록 설정한다
+PaperSprite 컴포넌트 선택 > 디테일뷰 > Rendering > Owner No See 항목 체크
+게임 실행 테스트.

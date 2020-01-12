@@ -1,0 +1,27 @@
+제 10장 개요
+캐릭터가 레벨 위에 놓여진 아이템 박스를 지나가면
+캐릭터에게 없었던 무기가 손에 부착된다.
+
+소캣 (Socket)이란?
+- Skeleton에 다른 콤포넌트, 액터를 부착할 떄 사용되는 접속구
+-Skeleton 편집창에서 특정 본 위에 마우스 우측 > 소켓추가
+
+소켓에 무기 아이템 탈착
+- Weapon -> SetupAttachment (GetMesh(), right_hand_Socket);
+- 무기를 수시로 캐릭터 탈부착하려면 무기가 Actor이어야 한다.
+
+무기 콤포넌트에 충돌 프리셋을 설정하는 방법
+-Weapon->SetCollisionProfileName(TEXT("NoCollision"));
+
+무기 액터의 동적 생성법
+-GetWorld() ->SpawnActor<MyWeapon>(FVector::ZeroVector, FRotator::ZeroRotator);
+-WeaponActor->AttachToComponent( GetMesh(), SnapToTargetNotIncludingScale, right_hand_Socket);
+
+박스 컬리젼의 크기를 코드에서 조정하는 방법
+- Trigger->SetBoxExtent(FVector(40.0F, 42.0F, 30.0F)); //박스의 중심에서 양축으로 이만큼 늘리겠다.
+
+OnComponentBeginOverlap() //블루프린트에서 썼던 박스에 겹쳤을 때 쓴 함수
+TSubclassOf<class MyWeapon> WeaponItemClass; //객체지향의 상속성 : MyWeapon의 자식클래스를 선언하는 것이다. (무기 클래스의 정보를 받기 위해 만들어짐)
+WeaponItemClass = MySword::StaticClass();
+
+
