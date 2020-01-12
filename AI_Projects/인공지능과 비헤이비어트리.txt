@@ -1,0 +1,24 @@
+챕터 12: 인공지능 AI컨트롤러와 비헤이비어 트리
+
+게임	(플레이어 vs 플레이어) - 컴퓨터의 역할: 중계
+	(플레이어 vs 컴퓨터) - 컴퓨터의 역할: 플레이어가 이기지 못하도록 능동적으로 생각. (AI 사용)
+
+언리얼 인공지능 설계방벙: Behavior Tree (행동트리)
+Player Character : 플레이어가 조종하는 캐릭터
+Non Playable Character: 플레이어가 조종하지 않는 캐릭터
+
+플레이어(키보드, 마우스) -> PlayerController -> 캐릭터 (플레이어의 의지가 캐릭터에게 반영)
+컴퓨터(Behaviour Tree) -> AIController -> 캐릭터
+
+BT: Behaviour Tree	: 프로세스 (인공지능 프로그램)
+BB: Blackboard	: 메모리 (인공지능 메모리)
+
+NavMeshBoundsVolume: 인공지능이 사용될 영역
+
+Behavior Tree의 노드들 (노드는 비헤이비어 에디터에 있지만 노드 상세기능은 코딩해줘야한다):
+Composite: 다수개의 하위 노드를 가질 수 있음.
+ - Sequence(순차: 자식노드들이 모두 실행된다): 하위 노드에서 false가 리턴되면 중단
+ - Selector(선택: 여러개 중에서 한개만 실행할 목적): 하위 노드에서 true가 리턴되면 중단
+Task: 말단 실행노드, 자식노드를 가지지 못함.
+Service: 독립적으로 사용 못함, 다른 노드에 부착하여 사용, 주기적으로 반복 실행 (주기를 개발자가 정할 수 있다)
+Decorator: Composite 노드의 조건문 역할. (조건문은 클래스)
